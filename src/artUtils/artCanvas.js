@@ -18,8 +18,12 @@ export function ArtCanvas() {
 
  const interval = setInterval(() => {
     const g = grid
-    for(let q = 0; q<10;q++){
-        
+    for(let q = 0; q<5;q++){
+        if(lines!=null){
+        let x = lines;
+        x.push(new Dot(getRandomInt(c.width),getRandomInt(c.height)))
+        setLine(x);
+        }
     }
  if(lines!=null){
     for(let i = 0; i<lines.length;i++){
@@ -33,7 +37,7 @@ export function ArtCanvas() {
             
     }
     
-		ctx.fillStyle = 'rgba(0,0,0,.1)';
+		ctx.fillStyle = 'rgba(0,0,0,.03)';
 		ctx.fillRect(0,0,c.width,c.height);
     }
 }, 10);
@@ -71,3 +75,6 @@ if(lines == null){
     </div>
     );
 }
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
