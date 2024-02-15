@@ -16,9 +16,12 @@ class Grid {
         this.angle = angle;
     }
     draw(ctx){
+        ctx.strokeStyle = 'white';
         ctx.moveTo(this.ix*this.width+this.width*.5,this.iy*this.height+40);
         ctx.beginPath();
         ctx.arc(this.ix*this.width+this.width*.5,this.iy*this.height+this.height*.5,2,0,2*Math.PI);
+        
+        ctx.fillStyle = 'white';
         ctx.fill();
         ctx.moveTo(this.ix*this.width+this.width*.5,this.iy*this.height+this.height*.5);
         ctx.lineTo(this.ix*this.width+this.width*.5+(Math.cos(this.angle)*(this.width*.5)),this.iy*this.height+this.height*.5+(Math.sin(this.angle)*(-this.height*1)))

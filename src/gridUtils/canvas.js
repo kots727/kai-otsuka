@@ -1,36 +1,34 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState, useContext } from 'react'
 import {GridField} from './Grid.js'
+import {Context} from '../App.js'
 
 export function Canvas() { 
-
+const [grid,setGrid] = useContext(Context)
      const canvasRef = useRef(null)
+
     useEffect(() => {
-        
-      const c = canvasRef.current
-c.width  = window.innerWidth-10;
-c.height = window.innerHeight-10
-
+      const interval = setInterval(() => {
+          
+     const c = canvasRef.current;
+     c.width  = window.innerWidth;
+     c.height = window.innerHeight;
+     
 var ctx = c.getContext("2d");
- let g = makePerlinField(c.width,c.height,40,30,1,40,0,[0.123, 0.8922397920382235],7)
-g.draw(ctx);
-      ctx.fillStyle = '#000000'
-    }, [])
+if(grid.height!==300){
+  ctx.rect(0, 0,c.width, c.height);
+  ctx.fill();
+grid.draw(ctx)
+}
+      }, 10);
+      return () => clearInterval(interval);
+    }, [grid])
 
-
-    function handleMouseMove(ev){
-        const c = canvasRef.current
-        var ctx = c.getContext("2d");
-        ctx.clearRect(0, 0, c.width, c.height);
-let g = makePerlinField(c.width,c.height,40,30,1,3,0,[(ev.pageX/c.width)/2, (ev.pageY/c.height)/2],7)
-
-window.grid.draw(ctx);
-    }
-    
     return (
-        <div onMouseMove={(ev)=> handleMouseMove(ev)}>
     <canvas ref={canvasRef} style={{ 
+      height: '100vh',
+      width: '100vw',
+      display:'block',
     }}></canvas>
-    </div>
     );
 }
 function fade(t) {

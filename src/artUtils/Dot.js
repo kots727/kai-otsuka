@@ -4,11 +4,11 @@ export class Dot {
 
     }
     draw(ctx,vx,vy){
+        ctx.fillStyle = 'red';
         ctx.beginPath(); 
-        ctx.moveTo(this.x, this.y);
-            this.x = this.x +vx;
-            this.y = this.y +vy;
-            ctx.lineTo(this.x,this.y);
-            ctx.stroke();
+        ctx.arc(this.x, this.y,6,0,Math.PI*2);
+        ctx.fill();
+            this.x = this.x +vx*4;
+            this.y = this.y +vy*4;
     }
 }
